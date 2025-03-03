@@ -32,4 +32,4 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Run build including the test
-      run: gradle build
+      run: gradle build --info

@@ -16,7 +16,8 @@ public class WebDriverConfig {
     try {
       // Configure Chrome options
       ChromeOptions options = new ChromeOptions();
-      options.addArguments("--start-maximized");
+      // options.addArguments("--start-maximized");
+      options.addArguments("--headless=new");
       options.addArguments("--disable-extensions");
 
       // Create and return WebDriver instance
