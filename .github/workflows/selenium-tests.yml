@@ -31,5 +31,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Download element selectors
+      uses: actions/download-artifact@v4
+      with:
+        name: element-selectors
+        path: src/test/resources/
+
     - name: Run build including the test
+      env:
+        OPENROUTER_API_KEY: ${{ vars.OPENROUTER_API_KEY }}
       run: gradle build --info
+
+    - name: Upload element selectors
+      uses: actions/upload-artifact@v4
+      with:
+        name: element-selectors
+        path: src/test/resources/elementSelectors.properties
+        retention-days: 7
