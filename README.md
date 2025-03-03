@@ -1,7 +1,14 @@
-# Selenium WebDriver Automation Project
+# Selenium WebDriver Automation Project with AI-Powered Element Search
 
 ## Overview
-This is a Java-based web automation project using Selenium WebDriver, following best practices for maintainability and separation of concerns.
+This is a Java-based web automation project using Selenium WebDriver, now enhanced with an AI-powered feature for automatic element searching. This feature leverages advanced machine learning algorithms to identify and interact with web elements more efficiently, reducing the need for manual intervention and increasing test reliability.
+
+## Key Features
+- **AI-Powered Element Search**: Automatically locate web elements using cutting-edge AI technology.
+- **Page Object Model Design Pattern**: Maintainable and scalable test architecture.
+- **Centralized WebDriver Configuration**: Simplifies setup and management of WebDriver instances.
+- **Robust Error Handling**: Ensures tests are resilient to unexpected changes.
+- **Comprehensive Logging**: Detailed logs for easy debugging and analysis.
 
 ## Prerequisites
 - Java 21 or higher

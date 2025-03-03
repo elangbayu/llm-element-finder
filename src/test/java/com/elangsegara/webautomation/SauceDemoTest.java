@@ -3,12 +3,11 @@ package com.elangsegara.webautomation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 import com.elangsegara.webautomation.config.WebDriverConfig;
 import com.elangsegara.webautomation.core.BasePage;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.elangsegara.webautomation.pages.LoginPage;
+import com.elangsegara.webautomation.pages.HomePage;
 
 public class SauceDemoTest extends BasePage {
     @BeforeEach
@@ -22,16 +21,13 @@ public class SauceDemoTest extends BasePage {
         navigateTo("https://www.saucedemo.com");
 
         // Login
-        findElement(By.id("user-name")).sendKeys("standard_user");
-        findElement(By.id("password")).sendKeys("secret_sauce");
-
-        // Use customized click method to use AI-based mechanism as fallback if the
-        // conventional method is failed
-        click("LOGIN_BUTTON", By.id("login_button"), "login button");
+        LoginPage loginPage = new LoginPage();
+        loginPage.login("standard_user", "secret_sauce");
 
         // Verify user successfully logged in by asserting that the inventory list is
         // displayed
-        assertTrue(findElement(By.id("inventory_container")).isDisplayed());
+        HomePage homePage = new HomePage();
+        homePage.verifyInventoryListIsDisplayed();
     }
 
     @AfterEach
