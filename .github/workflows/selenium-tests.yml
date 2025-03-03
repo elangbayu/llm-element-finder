@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: container-registry.oracle.com/graalvm/jdk:21
+      image: gradle:jdk21-graal
 
     services:
       selenium:
@@ -28,11 +28,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    # - name: Set up JDK
+    #   uses: actions/setup-java@v4
+    #   with:
+    #     distribution: 'graalvm'
+    #     java-version: '21'
+
+    # - name: Grant execute permission for gradlew
+    #   run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: gradle build
 
     - name: Run Selenium Tests
-      run: ./gradlew test
+      run: gradle test
