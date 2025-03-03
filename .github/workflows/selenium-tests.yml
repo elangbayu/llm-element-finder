@@ -36,7 +36,13 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: element-selectors
-        path: src/test/resources/elementSelectors.properties
+        path: src/test/resources/
+
+    - name: Verify downloaded artifact
+      continue-on-error: true
+      run: |
+        ls -l src/test/resources/
+        cat src/test/resources/elementSelectors.properties || echo "File not found"
 
     - name: Run build including the test
       env:
