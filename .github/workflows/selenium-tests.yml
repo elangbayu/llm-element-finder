@@ -21,24 +21,15 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-${{ github.event.inputs.browser }}
+        image: selenium/standalone-${{ github.event.inputs.browser }}:latest
+        ports:
+          - 4444:4444
+          - 7900:7900
         options: --shm-size=2gb
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # - name: Set up JDK
-    #   uses: actions/setup-java@v4
-    #   with:
-    #     distribution: 'graalvm'
-    #     java-version: '21'
-
-    # - name: Grant execute permission for gradlew
-    #   run: chmod +x gradlew
-
-    - name: Build with Gradle
+    - name: Run build including the test
       run: gradle build
-
-    - name: Run Selenium Tests
-      run: gradle test

@@ -1,8 +1,10 @@
 package com.elangsegara.webautomation.config;
 
+import java.net.URI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,14 @@ public class WebDriverConfig {
       options.addArguments("--disable-extensions");
 
       // Create and return WebDriver instance
-      driver = new ChromeDriver(options);
+      String ciEnv = System.getenv("CI");
+      if (ciEnv != null && ciEnv.equalsIgnoreCase("true")) {
+        driver = new RemoteWebDriver(new URI("http://selenium:4444/wd/hub").toURL(), options);
+        logger.info("Creating RemoteWebDriver for CI environment");
+      } else {
+        driver = new ChromeDriver(options);
+        logger.info("Creating local ChromeDriver");
+      }
     } catch (Exception e) {
       logger.error("Error creating WebDriver: {}", e.getMessage(), e);
       throw new RuntimeException("Failed to initialize WebDriver", e);
