@@ -11,19 +11,14 @@ Web automation that supercharged with an AI-powered feature for automatic elemen
 
 ## Prerequisites
 - Java 21 or higher
-- Gradle
 - Chrome Browser
+- LLM Provider API key. ⚠️ *Only choose model that support structured output*.
 
 ## Project Structure
 - `src/main/java/com/elangsegara/webautomation/config/`: WebDriver configuration
 - `src/main/java/com/elangsegara/webautomation/core/`: Base page and core utilities
 - `src/main/java/com/elangsegara/webautomation/pages/`: Page Object Model classes
 - `src/test/java/`: Test cases
-
-## Setup
-1. Clone the repository 🐙
-2. Make sure you have Java 17 and Gradle installed ✅
-3. Install Chrome browser 🖥️
 
 ## Running Tests
 ```bash
