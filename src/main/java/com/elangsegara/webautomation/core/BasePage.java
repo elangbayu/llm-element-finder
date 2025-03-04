@@ -21,8 +21,7 @@ import org.slf4j.LoggerFactory;
 public class BasePage {
   private static Logger logger = LoggerFactory.getLogger(BasePage.class);
 
-  // Path to your .properties file.
-  // Adjust accordingly (e.g., you might keep it in src/test/resources/).
+  // Path to .properties file to save element result from AI fallback method.
   private static final Path ELEMENT_SELECTORS_FILE =
       Path.of("src/test/resources/elementSelectors.properties");
 
@@ -105,17 +104,16 @@ public class BasePage {
       logger.info("Successfully clicked element (AI) for key '{}'.", key);
 
       // 4. Save newly found selector to .properties file
-      // (We assume that AiFallback returns a By.cssSelector(...) for simplicity.)
       String aiSelectorString = extractCssSelectorFromBy(aiBy);
       saveCachedSelector(key, aiSelectorString);
 
       logger.info("Saved new AI selector for key '{}' -> '{}'", key, aiSelectorString);
     } catch (TimeoutException e) {
       logger.error("AI-based selector timed out for key '{}'.", key, e);
-      throw e; // or handle gracefully
+      throw e;
     } catch (Exception e) {
       logger.error("Error in AI fallback for key '{}'.", key, e);
-      throw e; // or handle gracefully
+      throw e;
     }
   }
 
@@ -184,15 +182,13 @@ public class BasePage {
   }
 
   /**
-   * Attempts to extract the CSS selector string from a {@link By} object that is presumably a
-   * `By.cssSelector("someCss")`.
+   * Attempts to extract the CSS selector string from a {@link By} object
    *
    * @param by a By object (expected to be By.cssSelector).
    * @return the raw CSS selector if parseable, or an empty string otherwise.
    */
   private static String extractCssSelectorFromBy(By by) {
     String byString = by.toString();
-    // Typically "By.cssSelector: someCss"
     if (byString.startsWith("By.cssSelector: ")) {
       return byString.replace("By.cssSelector: ", "").trim();
     }
