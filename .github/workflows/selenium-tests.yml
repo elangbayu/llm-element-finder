@@ -46,7 +46,9 @@ jobs:
 
     - name: Run build including the test
       env:
-        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        LLM_PROVIDER_API_KEY: ${{ secrets.LLM_PROVIDER_API_KEY }}
+        LLM_BASE_API: ${{ vars.LLM_BASE_API }}
+        LLM_MODEL: ${{ vars.LLM_MODEL }}
       run: gradle build --info
 
     - name: Upload element selectors
