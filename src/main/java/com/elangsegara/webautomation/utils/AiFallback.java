@@ -20,7 +20,7 @@ public class AiFallback {
     String pageSource = domProcessor(WebDriverConfig.webDriver());
     OpenAIClient client =
         OpenAIOkHttpClient.builder()
-            .baseUrl("https://openrouter.ai/api/v1")
+            .baseUrl(System.getenv("LLM_BASE_API"))
             .apiKey(System.getenv("LLM_PROVIDER_API_KEY"))
             .build();
     ResponseFormatJsonSchema.JsonSchema.Schema schem =
