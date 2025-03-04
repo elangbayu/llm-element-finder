@@ -16,16 +16,16 @@ public class WebDriverConfig {
     try {
       // Configure Chrome options
       ChromeOptions options = new ChromeOptions();
-      // options.addArguments("--start-maximized");
-      options.addArguments("--headless=new");
       options.addArguments("--disable-extensions");
 
       // Create and return WebDriver instance
       String ciEnv = System.getenv("CI");
       if (ciEnv != null && ciEnv.equalsIgnoreCase("true")) {
+        options.addArguments("--headless=new");
         driver = new RemoteWebDriver(new URI("http://selenium:4444/wd/hub").toURL(), options);
         logger.info("Creating RemoteWebDriver for CI environment");
       } else {
+        options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
         logger.info("Creating local ChromeDriver");
       }
