@@ -13,6 +13,10 @@ Web automation that supercharged with an AI-powered feature for automatic elemen
 - Java 21 or higher
 - Chrome Browser
 - LLM Provider API key. ⚠️ *Only choose model that support structured output*.
+- Environment variables:
+  - `LLM_PROVIDER_API_KEY`: API Key to your LLM Provider
+  - `LLM_MODEL`: Model to use as element finder
+  - `LLM_BASE_API`: Base URL to call the API Key
 
 ## Project Structure
 - `src/main/java/com/elangsegara/webautomation/config/`: WebDriver configuration
