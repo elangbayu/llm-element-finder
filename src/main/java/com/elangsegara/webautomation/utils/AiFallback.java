@@ -21,7 +21,7 @@ public class AiFallback {
     OpenAIClient client =
         OpenAIOkHttpClient.builder()
             .baseUrl("https://openrouter.ai/api/v1")
-            .apiKey(System.getenv("OPENROUTER_API_KEY"))
+            .apiKey(System.getenv("LLM_PROVIDER_API_KEY"))
             .build();
     ResponseFormatJsonSchema.JsonSchema.Schema schem =
         ResponseFormatJsonSchema.JsonSchema.Schema.builder()
@@ -61,7 +61,7 @@ public class AiFallback {
                     "Return element's %s css selector based on this page source: ```%s```",
                     queryElement, pageSource))
             .responseFormat(schema)
-            .model("google/gemini-2.0-flash-lite-001")
+            .model(System.getenv("LLM_MODEL"))
             .maxCompletionTokens(200)
             .build();
 
@@ -80,6 +80,8 @@ public class AiFallback {
   }
 
   private static String domProcessor(WebDriver driver) {
+    // nextDiv is a predefined tag that directly access the content of the web.
+    // We can adjust this accordingly to the web under test.
     WebElement nextDiv = driver.findElement(By.id("root"));
     JavascriptExecutor js = (JavascriptExecutor) driver;
     return (String)
